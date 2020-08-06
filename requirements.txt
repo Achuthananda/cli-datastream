@@ -1,0 +1,9 @@
+cffi
+idna<2.7,>=2.5
+edgegrid-python==1.1.1
+requests==2.23.0
+prettytable==0.7.2
+configparser==3.5.0
+click==7.1.1
+texttable==1.4.0
+future==0.16.0

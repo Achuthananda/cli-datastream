@@ -1,0 +1,13 @@
+{
+  "requirements": {
+    "python": "3.0.0"
+  },
+  "commands": [
+    {
+      "name": "datastream",
+      "aliases": ["ds"],
+      "version": "1.0.8",
+      "description": "An Akamai CLI package for Datastream 2.0"
+    }
+  ]
+}
