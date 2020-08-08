@@ -272,7 +272,7 @@ Datasets Selected:
 ```
 
 #### Get the details of a Specific version of a stream.
-Retrieve the details of a stream.
+Retrieve the details of a specific version of a stream.
 ```
 $ akamai datastream get-stream 5665 -v 2
 Stream Id: 5665
