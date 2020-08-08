@@ -270,3 +270,42 @@ Datasets Selected:
 |                           |            |                           |             the client              |
 +---------------------------+------------+---------------------------+-------------------------------------+
 ```
+
+#### Get the details of a Specific version of a stream.
+Retrieve the details of a stream.
+```
+$ akamai datastream get-stream 5665 -v 2
+Stream Id: 5665
+Stream Name: achuth-ds2betajam
+Stream Version: 2
+Stream Type: RAW_LOGS
+Connector Name: achuth-s3ds2
+Connector Type: S3
+Product Name: Adaptive_Media_Delivery
+Upload Frequency(in secs): 30
+Created By: apadmana
+Datasets Selected:
++---------------------------+------------+---------------------------+-------------------------------------+
+|        Group Name         |  Field Id  |        Field Name         |          Field Description          |
++===========================+============+===========================+=====================================+
+|      Log information      |    1000    |          CP Code          |  Content Provider Code associated   |
+|                           |            |                           |            with Request             |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1006    |         Client IP         |  The IP address of the requesting   |
+|                           |            |                           |               client                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1008    |     HTTP Status Codes     |  The HTTP Response status sent to   |
+|                           |            |                           |             the client              |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |   The protocol of the transaction   |
+|   Message exchange data   |    1009    |       Protocol Type       | being monitored. Currently HTTP or  |
+|                           |            |                           |               HTTPS.                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1011    |       Request Host        | The value of the Host header of the |
+|                           |            |                           |       incoming client request       |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           | The method of the incoming request  |
+|   Message exchange data   |    1012    |      Request Method       |   - assuming an HTTP request. For   |
+|                           |            |                           |  example: GET, POST, PUT, and HEAD  |
++---------------------------+------------+---------------------------+-------------------------------------+
+```
