@@ -68,6 +68,20 @@ def main():
             connectorList = listConnectors()
         formatOutputConnectorList(connectorList, config.output_type)
 
+    elif config.command == "list-streams":
+        if hasattr(config, 'accountSwitchKey'):
+            streamList = listStreams(config.groupid,config.accountSwitchKey)
+        else:
+            streamList = listStreams(config.groupid)
+        formatOutputStreamList(streamList, config.output_type)
+
+    elif config.command == "get-stream":
+        if hasattr(config, 'accountSwitchKey'):
+            streamDetail = getStream(config.streamid,config.accountSwitchKey)
+        else:
+            streamDetail = getStream(config.streamid)
+        formatOutputStreamDetail(streamDetail, config.output_type)
+
     elif config.command == "acknowledge-cidr":
         #Please ask for acknowledgement.
         i = 1

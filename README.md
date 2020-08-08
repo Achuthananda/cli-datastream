@@ -149,6 +149,21 @@ $ akamai datastream list-groups --output-type json
 ]
 ```
 
+#### Usage of list-connectors Command
+This shows how to use list-connectors command.
+```
+$ akamai ds list-connectors -h
+          [or]
+$ akamai ds list-connectors --help
+usage: akamai datastream list-connectors [-h] [--output-type json/text]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type {json, text}. Default is text
+```
+
+
 #### List of all Connectors.
 Retrieve a list of all supported Connectors or End Points
 ```
@@ -160,4 +175,98 @@ $ akamai datastream list-connectors
 +---------------------------+--------------------------------+
 |             2             |               S3               |
 +---------------------------+--------------------------------+
+```
+
+
+#### Usage of list-streams Command
+This shows how to use list-streams command to get the list of streams in a group.
+```
+$ akamai ds list-streams -h
+          [or]
+$ akamai ds list-streams --help
+usage: akamai datastream list-streams [-h] [--output-type json/text] groupid
+
+positional arguments:
+  groupid               Group id for which streams need to be retrieve
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type is json or text. Default is text
+
+```
+
+#### List of all Streams in a group.
+Retrieve a list of all streams in a group.
+```
+$ akamai datastream list-streams 173720
++----------+----------------------+-----------------+---------------------------+----------------------+--------------+
+| StreamId |      StreamName      |    CreatedBy    |        Properties         |      Connectors      |    Status    |
++==========+======================+=================+===========================+======================+==============+
+|   5680   |   OPEN API testing   |    mrangasw     |     ogravier.betajam-     |  Azure Storage-Auto  | DEACTIVATED  |
+|          |                      |                 |     dstream.fun_clone     |        FIlled        |              |
++----------+----------------------+-----------------+---------------------------+----------------------+--------------+
+|   5670   |    dgarg_betajam     |      dgarg      |   betajam-dstream-dgarg   |   S3-dgarg_betajam   |  ACTIVATED   |
++----------+----------------------+-----------------+---------------------------+----------------------+--------------+
+
+```
+
+
+#### Usage of get-stream Command
+This shows how to use get-stream command to get the details of a stream in a group.
+```
+$ akamai ds get-stream -h
+          [or]
+$ akamai ds get-stream --help
+usage: akamai datastream get-stream [-h] [--version <latest>/<version id>]
+                                    [--output-type json/text]
+                                    streamid
+
+positional arguments:
+  streamid              Details of the stream
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version <latest>/<version id>, -v <latest>/<version id>
+                        Version id to fetch. Default will be latest version.
+  --output-type json/text, -t json/text
+                        Output type is json or text. Default is text
+
+```
+
+#### Get the details of a stream.
+Retrieve the details of a stream.
+```
+$ akamai datastream get-stream 5665
+
+Stream Id: 5665
+Stream Name: achuth-ds2betajam
+Stream Version: 1
+Stream Type: RAW_LOGS
+Connector Name: achuth-s3ds2
+Connector Type: S3
+Product Name: Adaptive_Media_Delivery
+Upload Frequency(in secs): 30
+Created By: apadmana
+Datasets Selected:
++---------------------------+------------+---------------------------+-------------------------------------+
+|        Group Name         |  Field Id  |        Field Name         |          Field Description          |
++===========================+============+===========================+=====================================+
+|      Log information      |    1000    |          CP Code          |  Content Provider Code associated   |
+|                           |            |                           |            with Request             |
++---------------------------+------------+---------------------------+-------------------------------------+
+|      Log information      |    1002    |        Request ID         |  The request identifier associated  |
+|                           |            |                           |            with request             |
++---------------------------+------------+---------------------------+-------------------------------------+
+|      Log information      |    1100    |       Request Time        |      Start time of the request      |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1005    |           Bytes           |   The content bytes served in the   |
+|                           |            |                           |           client response           |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1006    |         Client IP         |  The IP address of the requesting   |
+|                           |            |                           |               client                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1008    |     HTTP Status Codes     |  The HTTP Response status sent to   |
+|                           |            |                           |             the client              |
++---------------------------+------------+---------------------------+-------------------------------------+
 ```

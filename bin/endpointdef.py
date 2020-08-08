@@ -103,29 +103,29 @@ def listConnectors(accountSwitchKey=None):
         connectorList = prdHttpCaller.getResult(listConnectorEndpoint)
     return(connectorList)
 
+def listStreams(groupId,accountSwitchKey=None):
+    """ List the type of Streams available with the Group """
 
-def getConfig(config_id,accountSwitchKey=None):
-    """ Gets a specific policy on a given network in JSON format """
+    listStreamsEndpoint = 'datastream-config-api/v1/log/streams/group/' + str(groupId)
 
-    print("Retrieving: " + config_id )
     if accountSwitchKey:
         params = {'accountSwitchKey':accountSwitchKey}
-        configdetail = prdHttpCaller.getResult("/client-access-control/v1/configurations/"
-                                               + config_id,params)
+        streamList = prdHttpCaller.getResult(listStreamsEndpoint,params)
     else:
-        configdetail = prdHttpCaller.getResult("/client-access-control/v1/configurations/")
+        streamList = prdHttpCaller.getResult(listStreamsEndpoint)
+    return(streamList)
 
-    return(configdetail)
+def getStream(streamId,accountSwitchKey=None):
+    """Get the Details of the Stream """
 
-def acknowledgeCidr(config_id,version_id,accountSwitchKey=None):
-    """ Acknowledges CIDR for a specific version of CAC Config"""
-    data = {}
+    if hasattr(config, 'version') and config.version != 'latest':
+        getStreamDetailEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamId) + '/version/' + str(config.version)
+    else:
+        getStreamDetailEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamId)
+
     if accountSwitchKey:
         params = {'accountSwitchKey':accountSwitchKey}
-        ackdetail = prdHttpCaller.putResult("/client-access-control/v1/configurations/"
-                                               + config_id+"/acknowledge/"+version_id,data,params)
+        streamDetail = prdHttpCaller.getResult(getStreamDetailEndpoint,params)
     else:
-        ackdetail = prdHttpCaller.putResult("/client-access-control/v1/configurations/"
-                                               + config_id+"/acknowledge/"+version_id,data)
-
-    return(ackdetail)
+        streamDetail = prdHttpCaller.getResult(getStreamDetailEndpoint)
+    return(streamDetail)

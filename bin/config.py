@@ -39,34 +39,30 @@ class EdgeGridConfig():
 
     def __init__(self, config_values, configuration, flags=None):
         parser = self.parser
-        subparsers = parser.add_subparsers(help='commands', dest="command")
-
-        list_group_parser = subparsers.add_parser("list-groups", help="List all Groups in the Account")
-        list_group_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
-
-        list_streams_parser = subparsers.add_parser("list-connectors", help="List all Connectors Available. One of the connector can be used as destination.")
-        list_streams_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
-
-
-        '''
-
-        get_config_parser = subparsers.add_parser("get-configuration", help="Gets a specific configuration")
-        get_config_parser.add_argument('id', help="Config id to retrieve", action='store')
-        get_config_parser.add_argument('--output-file', '-f', type=argparse.FileType('wt'), metavar='file_name', help=' Save output to a file')
-        get_config_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
-
-        acknowledge_parser = subparsers.add_parser("acknowledge-cidr", help="Acknowledge CIDR")
-        acknowledge_parser.add_argument('config_id', help="Config id to Acknowledge", action='store')
-        acknowledge_parser.add_argument('version_id', help="Version id to Acknowledge", action='store')
-        acknowledge_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
-
-        '''
-
         parser.add_argument('--verbose', '-v',default=False, action='count', help=' Verbose mode')
         parser.add_argument('--debug', '-d', default=False, action='count', help=' Debug mode (prints HTTP headers)')
         parser.add_argument('--edgerc', '-e', default='~/.edgerc', metavar='credentials_file', help=' Location of the credentials file (default is ~/.edgerc)')
         parser.add_argument('--section', '-c', default='ds', metavar='credentials_file_section', action='store', help=' Credentials file Section\'s name to use')
         parser.add_argument('--accountSwitchKey', '-a', metavar='Account Switch Key', action='store', help=' Switch key to different account')
+
+
+        subparsers = parser.add_subparsers(help='commands', dest="command")
+
+        list_group_parser = subparsers.add_parser("list-groups", help="List all Groups in the Account")
+        list_group_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
+
+        list_connectors_parser = subparsers.add_parser("list-connectors", help="List all Connectors.")
+        list_connectors_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
+
+        list_streams_parser = subparsers.add_parser("list-streams", help="List all Streams.")
+        list_streams_parser.add_argument('groupid', help="Group id for which streams need to be retrieve", action='store')
+        list_streams_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
+        get_stream_parser = subparsers.add_parser("get-stream", help="Get Details of Stream.")
+        get_stream_parser.add_argument('streamid', help="Details of the stream", action='store')
+        get_stream_parser.add_argument('--version','-v', default='latest',metavar='<latest>/<version id>', help='Version id to fetch. Default will be latest version.')
+        get_stream_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
 
         if flags:
             for argument in flags.keys():
