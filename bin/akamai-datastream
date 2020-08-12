@@ -82,6 +82,13 @@ def main():
             streamDetail = getStream(config.streamid)
         formatOutputStreamDetail(streamDetail, config.output_type)
 
+    elif config.command == "activation-history":
+        if hasattr(config, 'accountSwitchKey'):
+            activationHistory = getStreamActHistory(config.streamid,config.accountSwitchKey)
+        else:
+            activationHistory = getStreamActHistory(config.streamid)
+        formatOutputActHistory(activationHistory, config.output_type)
+
     elif config.command == "acknowledge-cidr":
         #Please ask for acknowledgement.
         i = 1

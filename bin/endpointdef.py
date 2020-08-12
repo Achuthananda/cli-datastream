@@ -129,3 +129,14 @@ def getStream(streamId,accountSwitchKey=None):
     else:
         streamDetail = prdHttpCaller.getResult(getStreamDetailEndpoint)
     return(streamDetail)
+
+def getStreamActHistory(streamId,accountSwitchKey=None):
+
+    streamActHistoryEndpoint = '/datastream-config-api/v1/log/streams/'+ str(streamId) + '/activationHistory'
+
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        streamActHistory = prdHttpCaller.getResult(streamActHistoryEndpoint,params)
+    else:
+        streamActHistory = prdHttpCaller.getResult(streamActHistoryEndpoint)
+    return(streamActHistory)

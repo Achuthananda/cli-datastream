@@ -63,6 +63,10 @@ class EdgeGridConfig():
         get_stream_parser.add_argument('--version','-v', default='latest',metavar='<latest>/<version id>', help='Version id to fetch. Default will be latest version.')
         get_stream_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
 
+        activation_history_parser = subparsers.add_parser("activation-history", help="Get Details of Stream Activation History.")
+        activation_history_parser.add_argument('streamid', help="Stream ID", action='store')
+        activation_history_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
 
         if flags:
             for argument in flags.keys():

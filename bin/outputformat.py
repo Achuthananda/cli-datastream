@@ -127,3 +127,27 @@ def formatOutputStreamDetail(streamDetail, output_type):
                 ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
+
+
+def formatOutputActHistory(activationHistory, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(activationHistory, indent=2))
+
+    if output_type == "text":
+        # Iterate over the dictionary and print the selected information
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([8,9,15,25,15])
+        ParentTable.set_cols_align(['c','c','c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m','m','m'])
+        Parentheader = ['StreamId','VersionId','CreatedBy','Created Date','Status']
+        ParentTable.header(Parentheader)
+        for my_item in activationHistory:
+            status = "Inactive"
+            if my_item["isActive"] == True:
+                status = "Active"
+            Parentrow = [ my_item["streamId"],my_item["streamVersionId"],my_item["createdBy"],my_item["createdDate"],status]
+            ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)

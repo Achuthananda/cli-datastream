@@ -309,3 +309,39 @@ Datasets Selected:
 |                           |            |                           |  example: GET, POST, PUT, and HEAD  |
 +---------------------------+------------+---------------------------+-------------------------------------+
 ```
+
+#### Usage of activation-history Command
+This shows how to use activation-history command to get the details of activation history of a stream .
+```
+$ akamai ds activation-history -h
+          [or]
+$ akamai ds activation-history --help
+uusage: akamai-datastream activation-history [-h] [--output-type json/text]
+                                            streamid
+
+positional arguments:
+  streamid              Stream ID
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type is json or text. Default is text
+
+```
+
+
+#### List the Activation History of a Stream.
+This command gives the details of activation history of a stream.
+```
+$ akamai datastream activation-history 5665
++----------+-----------+-----------------+---------------------------+-----------------+
+| StreamId | VersionId |    CreatedBy    |       Created Date        |     Status      |
++==========+===========+=================+===========================+=================+
+|   5665   |     2     |    apadmana     |  08-08-2020 14:00:43 GMT  |     Active      |
++----------+-----------+-----------------+---------------------------+-----------------+
+|   5665   |     1     |    apadmana     |  05-08-2020 17:31:17 GMT  |     Active      |
++----------+-----------+-----------------+---------------------------+-----------------+
+|   5665   |     1     |    apadmana     |  05-08-2020 15:41:29 GMT  |    Inactive     |
++----------+-----------+-----------------+---------------------------+-----------------+
+
+```
