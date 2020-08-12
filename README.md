@@ -345,3 +345,30 @@ $ akamai datastream activation-history 5665
 +----------+-----------+-----------------+---------------------------+-----------------+
 
 ```
+
+
+#### Usage of list-stream-types Command
+This shows how to use list-stream-types command.
+```
+$ akamai ds list-stream-types -h
+          [or]
+$ akamai ds list-stream-types --help
+usage: akamai-datastream list-stream-types [-h] [--output-type json/text]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type {json, text}. Default is text
+```
+
+
+#### List of all Stream Types.
+Get the list of all types of streams available.
+```
+$ akamai datastream list-stream-types
++--------------+----------------+----------------------+------------+----------+
+| StreamTypeId | StreamTypeName | StreamTypeIdentifier |  Delivery  |   Raw    |
++==============+================+======================+============+==========+
+|      3       |    2.0 BETA    |       RAW_LOGS       |    Log     |   Yes    |
++--------------+----------------+----------------------+------------+----------+
+```

@@ -54,6 +54,9 @@ class EdgeGridConfig():
         list_connectors_parser = subparsers.add_parser("list-connectors", help="List all Connectors.")
         list_connectors_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
 
+        list_stream_type_parser = subparsers.add_parser("list-stream-types", help="List all Types of Stream.")
+        list_stream_type_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
+
         list_streams_parser = subparsers.add_parser("list-streams", help="List all Streams.")
         list_streams_parser.add_argument('groupid', help="Group id for which streams need to be retrieve", action='store')
         list_streams_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')

@@ -103,6 +103,18 @@ def listConnectors(accountSwitchKey=None):
         connectorList = prdHttpCaller.getResult(listConnectorEndpoint)
     return(connectorList)
 
+def listStreamTypes(accountSwitchKey=None):
+    """ List the type of streams available with the datastream."""
+
+    listStreamTypeEndpoint = 'datastream-config-api/v1/log/streamTypes'
+
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        streamTypeList = prdHttpCaller.getResult(listStreamTypeEndpoint,params)
+    else:
+        streamTypeList = prdHttpCaller.getResult(listStreamTypeEndpoint)
+    return(streamTypeList)
+
 def listStreams(groupId,accountSwitchKey=None):
     """ List the type of Streams available with the Group """
 

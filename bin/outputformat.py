@@ -75,6 +75,31 @@ def formatOutputConnectorList(connectorlist, output_type):
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
 
+
+def formatOutputStreamTypeList(streamTypeList, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(streamTypeList, indent=2))
+
+    if output_type == "text":
+        # Iterate over the dictionary and print the selected information
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([12,14,20,10,8])
+        ParentTable.set_cols_align(['c','c','c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m','m','m'])
+        Parentheader = ['StreamTypeId','StreamTypeName','StreamTypeIdentifier','Delivery','Raw']
+        ParentTable.header(Parentheader)
+        for my_item in streamTypeList:
+            raw = "No"
+            if my_item["isRaw"] == True:
+                raw = "Yes"
+            Parentrow = [ my_item["streamTypeId"],my_item["streamTypeName"],my_item["streamTypeIdentifier"],my_item["deliveryType"],raw]
+            ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)
+
+
 def formatOutputStreamList(streamlist, output_type):
     """ Formats the output on a given format (json or text) """
     if output_type == "json":

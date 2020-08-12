@@ -68,6 +68,13 @@ def main():
             connectorList = listConnectors()
         formatOutputConnectorList(connectorList, config.output_type)
 
+    elif config.command == "list-stream-types":
+        if hasattr(config, 'accountSwitchKey'):
+            streamTypeList = listStreamTypes(config.accountSwitchKey)
+        else:
+            streamTypeList = listStreamTypes()
+        formatOutputStreamTypeList(streamTypeList, config.output_type)
+
     elif config.command == "list-streams":
         if hasattr(config, 'accountSwitchKey'):
             streamList = listStreams(config.groupid,config.accountSwitchKey)
