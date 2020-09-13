@@ -1,0 +1,26 @@
+{
+    "streamName": "achuth-ds2betajam",
+    "streamType": "RAW_LOGS",
+    "templateName": "EDGE_LOGS",
+    "contractId": "3-16TWBVX",
+    "propertyIds": [
+        639738
+    ],
+    "datasetFieldIds": [
+        1002,
+        1100,
+        1006,
+        1012
+    ],
+    "config": {
+        "delimiter": "COMMA",
+        "uploadFilePrefix": "ak",
+        "uploadFileSuffix": "amai",
+        "frequency": {
+            "timeInSec": 30,
+            "sizeInMb": 4,
+            "numberOfRecords": 32000
+        }
+    },
+    "emailIds": "apadmana@akamai.com,phr@akamai.com"
+}

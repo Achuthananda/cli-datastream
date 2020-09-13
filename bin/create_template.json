@@ -1,0 +1,42 @@
+{
+  "streamName": "achuth-dsssssbetajam",
+  "activateNow": false,
+  "streamType": "RAW_LOGS",
+  "productId": "Adaptive_Media_Delivery",
+  "templateName": "EDGE_LOGS",
+  "groupId": 12373720,
+  "groupName": "DS2 Beta Jam",
+  "contractId": "3-16TWBVX",
+  "propertyIds": [
+        641134528
+  ],
+  "datasetFieldIds": [
+        1000,
+        1002,
+        1100
+  ],
+  "config": {
+    "delimiter": "COMMA",
+    "uploadFilePrefix": "ak",
+    "uploadFileSuffix": "ds",
+    "frequency": {
+      "timeInSec": 30,
+      "sizeInMb": 4,
+      "numberOfRecords": 32000
+    },
+    "useStaticPublicIP": false
+  },
+  "connectors": [
+    {
+      "compressLogs": true,
+      "path": "apadmaasdsadna/",
+      "connectorName": "achuasdsadth-s3ds2",
+      "bucket": "ds2betasdsadajam",
+      "region": "us-east-1",
+      "accessKey": "acess_key",
+      "secretAccessKey": "secret_key",
+      "connectorType": "S3"
+    }
+  ],
+  "emailIds": "apadmana@akamai.com"
+}
