@@ -415,7 +415,7 @@ $ akamai datastream list-products
 #### Get the Stream History.
 Retrieves the history of a stream. This takes stream ID as input
 ```
-akamai datastream stream-history <streamid>
+$akamai datastream stream-history <streamid>
 ```
 ```
 $ akamai datastream stream-history 5665
@@ -459,4 +459,215 @@ Request header data : ['Accept-Language', 'X-Forwarded-For', 'Cookie', 'Range', 
 Network performance data : ['Request End Time', 'Transfer Time', 'Error Code R14', 'Turn Around Time']
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+```
+
+#### Get the Datasets Available
+Retrieves the list of datasets for a particular template.
+```
+$akamai datastream list-datasets --template <templatename>
+```
+```
+$ akamai datastream list-datasets --template EDGE_LOGS
++---------------------------+------------+---------------------------+-------------------------------------+
+|        Group Name         |  Field Id  |        Field Name         |          Field Description          |
++===========================+============+===========================+=====================================+
+|      Log information      |    1000    |          CP Code          |  Content Provider Code associated   |
+|                           |            |                           |            with Request             |
++---------------------------+------------+---------------------------+-------------------------------------+
+|      Log information      |    1002    |        Request ID         |  The request identifier associated  |
+|                           |            |                           |            with request             |
++---------------------------+------------+---------------------------+-------------------------------------+
+|      Log information      |    1100    |       Request Time        |      Start time of the request      |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1005    |           Bytes           |   The content bytes served in the   |
+|                           |            |                           |           client response           |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1006    |         Client IP         |  The IP address of the requesting   |
+|                           |            |                           |               client                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1008    |     HTTP Status Codes     |  The HTTP Response status sent to   |
+|                           |            |                           |             the client              |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |   The protocol of the transaction   |
+|   Message exchange data   |    1009    |       Protocol Type       | being monitored. Currently HTTP or  |
+|                           |            |                           |               HTTPS.                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1011    |       Request Host        | The value of the Host header of the |
+|                           |            |                           |       incoming client request       |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           | The method of the incoming request  |
+|   Message exchange data   |    1012    |      Request Method       |   - assuming an HTTP request. For   |
+|                           |            |                           |  example: GET, POST, PUT, and HEAD  |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |  The path used in the incoming URI  |
+|   Message exchange data   |    1013    |       Request Path        |   from the client, not including    |
+|                           |            |                           |            query strings            |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1014    |       Request Port        |   The port number of the incoming   |
+|                           |            |                           |           client request            |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1015    |  Response Content Length  |   The value of the Content-Length   |
+|                           |            |                           |    header in the client response    |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1016    |   Response Content Type   |    The value of the Content-Type    |
+|                           |            |                           |    header in the client request     |
++---------------------------+------------+---------------------------+-------------------------------------+
+|   Message exchange data   |    1017    |        User-Agent         | The value of the User-Agent header  |
+|                           |            |                           |        in the client request        |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |  The total bytes served in client   |
+|   Message exchange data   |    1101    |        Total Bytes        |  response including content & HTTP  |
+|                           |            |                           |              overhead               |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           | Provides a list of acceptable human |
+|    Request header data    |    1019    |      Accept-Language      |     languages for response. For     |
+|                           |            |                           | example, American English is en-US  |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |  Lists the HTTP cookie previously   |
+|    Request header data    |    1023    |          Cookie           |   sent by the server in the Set-    |
+|                           |            |                           |               Cookie                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |   Requests a specific part of an    |
+|    Request header data    |    1031    |           Range           |  entity by providing a single byte  |
+|                           |            |                           |   range or a set of byte ranges.    |
+|                           |            |                           |     Bytes are numbered from 0.      |
++---------------------------+------------+---------------------------+-------------------------------------+
+|    Request header data    |    1032    |          Referer          |  Lists the resource from which the  |
+|                           |            |                           |     requested URI was obtained      |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |    Identifies the originating IP    |
+|    Request header data    |    1037    |      X-Forwarded-For      | address of a client connecting to a |
+|                           |            |                           | web server through an HTTP proxy or |
+|                           |            |                           |            load balancer            |
++---------------------------+------------+---------------------------+-------------------------------------+
+| Network performance data  |    1033    |     Request End Time      |  Provides the time of the request   |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |  If there is an error serving the   |
+| Network performance data  |    1068    |      Error Code R14       |   request a string indicating the   |
+|                           |            |                           |       problem is logged here.       |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           |  The time in milliseconds between   |
+|                           |            |                           |  receipt of the end of the request  |
+| Network performance data  |    1102    |     Turn Around Time      | headers and when the first byte of  |
+|                           |            |                           | the reply is written to the client  |
+|                           |            |                           |               socket                |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           | The time in milliseconds it took to |
+|                           |            |                           |  send the response to the client,   |
+| Network performance data  |    1103    |       Transfer Time       | measured from the time Akamai Edge  |
+|                           |            |                           | was ready to send the first byte to |
+|                           |            |                           |     when it sent the last byte.     |
++---------------------------+------------+---------------------------+-------------------------------------+
+|                           |            |                           | contains the value specified by the |
+|                           |            |                           | metadata tag reporting:lds.custom-  |
+|           Other           |    1082    |       Custom Field        | field. Note that, the tag can (and  |
+|                           |            |                           | generally would) take an extracted  |
+|                           |            |                           |   variable as its content, so the   |
+|                           |            |                           |  value of this field is not fixed.  |
++---------------------------+------------+---------------------------+-------------------------------------+
+```
+
+#### Activate a Stream.
+This Command will activate a stream.
+```
+$akamai datastream activate <stream id>
+```
+```
+$ akamai datastream activate 5669
+{
+  "streamVersionKey": {
+    "streamId": 5669,
+    "streamVersionId": 1
+  }
+}
+```
+
+#### Deactivate a Stream.
+This Command will deactivate a stream.
+```
+$akamai datastream deactivate <stream id>
+```
+```
+$ akamai datastream deactivate 6305
+{
+  "streamVersionKey": {
+    "streamId": 6305,
+    "streamVersionId": 1
+  }
+}
+```
+
+#### List all properties of a product type in a group .
+This Command will list all properties of a product type in a group
+```
+$akamai datastream list-properties <groupdId> <productId>
+```
+```
+$ akamai datastream list-properties 173720 Adaptive_Media_Delivery
++----------+--------------------------------+
+| Property |          PropertyName          |
+|    Id    |                                |
++==========+================================+
+|  632446  |    amd_template.techjam.fun    |
++----------+--------------------------------+
+|  638300  |   damin.betajam-dstream-amd    |
++----------+--------------------------------+
+|  639714  |   tblackfo.techjam.fun_clone   |
++----------+--------------------------------+
+|  639728  |    betajam-dstream-smacleod    |
++----------+--------------------------------+
+|  639731  |    etajam-dstream-heerikss     |
++----------+--------------------------------+
+|  639732  |    betajam-dstream-gethilka    |
++----------+--------------------------------+
+|  639737  |      fdiazsav.techjam.fun      |
++----------+--------------------------------+
+|  639738  | apadmana-amd_template.techjam  |
++----------+--------------------------------+
+|  639753  |     sammy.betajam-dstream      |
++----------+--------------------------------+
+|  639754  |       ogravier.betajam-        |
+|          |       dstream.fun_clone        |
++----------+--------------------------------+
+|  645893  |    betajam-dstream-jtokimit    |
++----------+--------------------------------+
+|  645896  |   aphilip.techjam.fun_clone    |
++----------+--------------------------------+
+|  648514  | apadmana-amd_template1.techjam |
++----------+--------------------------------+
+|  648528  |           apadmana-            |
+|          |  amd_template3.techjam_clone   |
++----------+--------------------------------+
+|  648529  | apadmana-amd_template2.techjam |
++----------+--------------------------------+
+```
+
+#### Create a Stream.
+This CLI will create a stream. This command expects a json file in the same directory and the format is available in create_template.json file.
+```
+$akamai datastream create <json_file_name>
+```
+```
+$ akamai datastream create create.json
+{
+  "streamVersionKey": {
+    "streamId": 6454,
+    "streamVersionId": 1
+  }
+}
+```
+
+#### Update a Stream.
+This CLI will update a stream. This command expects stream id and a json file in the same directory and the format is available in update_template.json file. This command will also auto publish the stream.
+```
+$akamai datastream update <streamId> <json_file_name>
+```
+```
+$ akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL update 6454 update.json
+{
+  "streamVersionKey": {
+    "streamId": 6454,
+    "streamVersionId": 2
+  }
+}
 ```
