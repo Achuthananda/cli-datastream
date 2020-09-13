@@ -660,6 +660,50 @@ This CLI will create a stream. This command expects a json file in the same dire
 $akamai datastream create <json_file_name>
 ```
 ```
+{
+  "streamName": "test-ds-jam",
+  "activateNow": false,
+  "streamType": "RAW_LOGS",
+  "productId": "Adaptive_Media_Delivery",
+  "templateName": "EDGE_LOGS",
+  "groupId": 12373asd720,
+  "groupName": "DS2 Beta Jam",
+  "contractId": "3-16TSLSLWBVX",
+  "propertyIds": [
+        641134528
+  ],
+  "datasetFieldIds": [
+        1000,
+        1002,
+        1100
+  ],
+  "config": {
+    "delimiter": "COMMA",
+    "uploadFilePrefix": "ak",
+    "uploadFileSuffix": "ds",
+    "frequency": {
+      "timeInSec": 30,
+      "sizeInMb": 4,
+      "numberOfRecords": 32000
+    },
+    "useStaticPublicIP": false
+  },
+  "connectors": [
+    {
+      "compressLogs": true,
+      "path": "apadmaasdsadna/",
+      "connectorName": "achuasdsadth-s3ds2",
+      "bucket": "ds2betasdsadajam",
+      "region": "us-east-1",
+      "accessKey": "acess_key",
+      "secretAccessKey": "secret_key",
+      "connectorType": "S3"
+    }
+  ],
+  "emailIds": "apadmasasasdfdfana@akamai.com"
+}
+```
+```
 $ akamai datastream create create.json
 {
   "streamVersionKey": {
@@ -673,6 +717,34 @@ $ akamai datastream create create.json
 This CLI will update a stream. This command expects stream id and a json file in the same directory and the format is available in update_template.json file. This command will also auto publish the stream.
 ```
 $akamai datastream update <streamId> <json_file_name>
+```
+```
+{
+    "streamName": "achuth-dasdsads2betajam",
+    "streamType": "RAW_LOGS",
+    "templateName": "EDGE_LOGS",
+    "contractId": "3-16TWBVX",
+    "propertyIds": [
+        6397asdsa38
+    ],
+    "datasetFieldIds": [
+        1002,
+        1100,
+        1006,
+        1012
+    ],
+    "config": {
+        "delimiter": "COMMA",
+        "uploadFilePrefix": "ak",
+        "uploadFileSuffix": "amai",
+        "frequency": {
+            "timeInSec": 30,
+            "sizeInMb": 4,
+            "numberOfRecords": 32000
+        }
+    },
+    "emailIds": "apadasdsmana@example.com"
+}
 ```
 ```
 $ akamai datastream update 6454 update.json
