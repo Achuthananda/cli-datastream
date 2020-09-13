@@ -61,6 +61,13 @@ class EdgeGridConfig():
         list_streams_parser.add_argument('groupid', help="Group id for which streams need to be retrieve", action='store')
         list_streams_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
 
+        list_datasets_parser = subparsers.add_parser("list-datasets", help="List all Datasets.")
+        list_datasets_parser.add_argument('--template', default='EDGE_LOGS', choices=['EDGE_LOGS'],help=' Template name for which datasets need to be fetched.[Example: EDGE_LOGS]')
+        list_datasets_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
+        list_products_parser = subparsers.add_parser("list-products", help="List all Products.")
+        list_products_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
         get_stream_parser = subparsers.add_parser("get-stream", help="Get Details of Stream.")
         get_stream_parser.add_argument('streamid', help="Details of the stream", action='store')
         get_stream_parser.add_argument('--version','-v', default='latest',metavar='<latest>/<version id>', help='Version id to fetch. Default will be latest version.')
@@ -69,6 +76,10 @@ class EdgeGridConfig():
         activation_history_parser = subparsers.add_parser("activation-history", help="Get Details of Stream Activation History.")
         activation_history_parser.add_argument('streamid', help="Stream ID", action='store')
         activation_history_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+
+        stream_history_parser = subparsers.add_parser("stream-history", help="Get Details of Stream History.")
+        stream_history_parser.add_argument('streamid', help="Stream ID", action='store')
+        stream_history_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
 
 
         if flags:

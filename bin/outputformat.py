@@ -76,6 +76,36 @@ def formatOutputConnectorList(connectorlist, output_type):
         print(MainParentTable)
 
 
+def formatOutputProductList(productsList, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(productsList, indent=2))
+
+    if output_type == "text":
+        # Iterate over the dictionary and print the selected information
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([20,20,15])
+        ParentTable.set_cols_align(['c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m'])
+        Parentheader = ['Product','Groups','Templates']
+        ParentTable.header(Parentheader)
+
+        for my_item in productsList:
+            group_ids = []
+            template_list = []
+            for group in my_item["groups"]:
+                group_ids.append(group["groupId"])
+
+            for template_item in my_item["templates"]:
+                template_list.append(template_item["templateName"])
+
+            Parentrow = [ my_item["productName"],group_ids,template_list]
+            ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)
+
+
 def formatOutputStreamTypeList(streamTypeList, output_type):
     """ Formats the output on a given format (json or text) """
     if output_type == "json":
@@ -85,16 +115,16 @@ def formatOutputStreamTypeList(streamTypeList, output_type):
     if output_type == "text":
         # Iterate over the dictionary and print the selected information
         ParentTable = tt.Texttable()
-        ParentTable.set_cols_width([12,14,20,10,8])
-        ParentTable.set_cols_align(['c','c','c','c','c'])
-        ParentTable.set_cols_valign(['m','m','m','m','m'])
-        Parentheader = ['StreamTypeId','StreamTypeName','StreamTypeIdentifier','Delivery','Raw']
+        ParentTable.set_cols_width([14,10,8])
+        ParentTable.set_cols_align(['c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m'])
+        Parentheader = ['StreamTypeName','StreamType','Raw']
         ParentTable.header(Parentheader)
         for my_item in streamTypeList:
             raw = "No"
             if my_item["isRaw"] == True:
                 raw = "Yes"
-            Parentrow = [ my_item["streamTypeId"],my_item["streamTypeName"],my_item["streamTypeIdentifier"],my_item["deliveryType"],raw]
+            Parentrow = [my_item["streamTypeName"],my_item["streamType"],raw]
             ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
@@ -133,7 +163,7 @@ def formatOutputStreamDetail(streamDetail, output_type):
         print('Stream Version:',streamDetail['streamVersionId'])
         print('Stream Type:',streamDetail['streamType'])
         print('Connector Name:',streamDetail['connectors'][0]['connectorName'])
-        print('Connector Type:',streamDetail['connectors'][0]['connectorTypeName'])
+        print('Connector Type:',streamDetail['connectors'][0]['connectorType'])
         print('Product Name:',streamDetail['productName'])
         print('Upload Frequency(in secs):',streamDetail['config']['frequency']['timeInSec'])
         print('Created By:',streamDetail['createdBy'])
@@ -145,10 +175,10 @@ def formatOutputStreamDetail(streamDetail, output_type):
         ParentTable.set_cols_valign(['m','m','m','m'])
         Parentheader = ['Group Name','Field Id','Field Name','Field Description']
         ParentTable.header(Parentheader)
-        for my_item in streamDetail['datasetsInfos']:
+        for my_item in streamDetail['datasets']:
             group_name = my_item["datasetGroupName"]
-            for ds_item in my_item['dsFieldInfoList']:
-                Parentrow = [group_name, ds_item["datasetFieldId"],ds_item["datasetFieldName"],ds_item["datasetFieldDesc"]]
+            for ds_item in my_item['datasetFields']:
+                Parentrow = [group_name, ds_item["datasetFieldId"],ds_item["datasetFieldName"],ds_item["datasetFieldDescription"]]
                 ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
@@ -174,5 +204,49 @@ def formatOutputActHistory(activationHistory, output_type):
                 status = "Active"
             Parentrow = [ my_item["streamId"],my_item["streamVersionId"],my_item["createdBy"],my_item["createdDate"],status]
             ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)
+
+def formatOutputStreamHistory(streamHistory, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(streamHistory, indent=2))
+
+    if output_type == "text":
+        for my_item in streamHistory:
+            print("------------------------------------------------------------------------------------------------------------------------------------------------------")
+            print("Stream ID:",my_item['streamId'])
+            print("Stream Version:",my_item['streamVersionId'])
+            print("Stream Name:",my_item['streamName'])
+            print("Product Name",my_item['productName'])
+            print("DataSets:")
+            for dataset_info in my_item["datasets"]:
+                    dataset_name = dataset_info["datasetGroupName"]
+                    field_list = []
+                    for fields in dataset_info["datasetFields"]:
+                        field_list.append(fields['datasetFieldName'])
+                    print(dataset_name,":",field_list)
+
+        print("------------------------------------------------------------------------------------------------------------------------------------------------------")
+
+def formatOutputDatasetList(datasetList, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(datasetList, indent=2))
+
+    if output_type == "text":
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([25,10,25,35])
+        ParentTable.set_cols_align(['c','c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m','m'])
+        Parentheader = ['Group Name','Field Id','Field Name','Field Description']
+        ParentTable.header(Parentheader)
+        for my_item in datasetList:
+            group_name = my_item["datasetGroupName"]
+            for ds_item in my_item['datasetFields']:
+                Parentrow = [group_name, ds_item["datasetFieldId"],ds_item["datasetFieldName"],ds_item["datasetFieldDescription"]]
+                ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)

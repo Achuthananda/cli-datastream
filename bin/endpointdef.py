@@ -103,6 +103,19 @@ def listConnectors(accountSwitchKey=None):
         connectorList = prdHttpCaller.getResult(listConnectorEndpoint)
     return(connectorList)
 
+def listProducts(accountSwitchKey=None):
+    """ List the type of connectors available with the datastream .
+    Can use one of the connector types as a destination for log delivery in a data stream configuration"""
+
+    listProductEndpoint = 'datastream-config-api/v1/log/products'
+
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        productsList = prdHttpCaller.getResult(listProductEndpoint,params)
+    else:
+        productsList = prdHttpCaller.getResult(listProductEndpoint)
+    return(productsList)
+
 def listStreamTypes(accountSwitchKey=None):
     """ List the type of streams available with the datastream."""
 
@@ -152,3 +165,22 @@ def getStreamActHistory(streamId,accountSwitchKey=None):
     else:
         streamActHistory = prdHttpCaller.getResult(streamActHistoryEndpoint)
     return(streamActHistory)
+
+
+def getStreamHistory(streamId,accountSwitchKey=None):
+    streamHistoryEndpoint = '/datastream-config-api/v1/log/streams/'+ str(streamId) + '/history'
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        streamHistory = prdHttpCaller.getResult(streamHistoryEndpoint,params)
+    else:
+        streamHistory = prdHttpCaller.getResult(streamHistoryEndpoint)
+    return(streamHistory)
+
+def getDatasets(templatename,accountSwitchKey=None):
+    datasetsEndpoint = '/datastream-config-api/v1/log/datasets/template/'+ templatename
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        datasetList = prdHttpCaller.getResult(datasetsEndpoint,params)
+    else:
+        datasetList = prdHttpCaller.getResult(datasetsEndpoint)
+    return(datasetList)
