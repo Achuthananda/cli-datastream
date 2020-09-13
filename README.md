@@ -39,7 +39,7 @@ $akamai datastream [global flags] Commands
 ## Examples
 
 #### Help
-This displays the usage of CAC akamai CLI.
+This displays the usage of Datastream Akamai CLI.
 ```
 $akamai ds --help
 usage: akamai-datastream [-h] [--verbose] [--debug]
@@ -371,4 +371,92 @@ $ akamai datastream list-stream-types
 +==============+================+======================+============+==========+
 |      3       |    2.0 BETA    |       RAW_LOGS       |    Log     |   Yes    |
 +--------------+----------------+----------------------+------------+----------+
+```
+
+#### List of all Products.
+Get the list of all types of Products, Products Ids and groups it is available.
+```
+$ akamai datastream list-products
++----------------------+---------------------------+---------------------------+-----------------+
+|       Product        |        Product Id         |          Groups           |    Templates    |
++======================+===========================+===========================+=================+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|     Ion Standard     |       Ion_Standard        |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|                      |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|     Ion Premier      |        Ion_Premier        |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|                      |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|     Dynamic Site     | Dynamic_Site_Accelerator  |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|     Accelerator      |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|  Ion Media Advanced  |    Ion_Media_Advanced     |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|                      |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|    Adaptive Media    |  Adaptive_Media_Delivery  |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|       Delivery       |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+|                      |                           |   [48668, 73337, 84517,   |                 |
+|  Download Delivery   |     Download_Delivery     |  93139, 103415, 103489,   |  ['EDGE_LOGS']  |
+|                      |                           |  106598, 117609, 118499,  |                 |
+|                      |                           |      141474, 173720]      |                 |
++----------------------+---------------------------+---------------------------+-----------------+
+```
+
+#### Get the Stream History.
+Retrieves the history of a stream. This takes stream ID as input
+```
+akamai datastream stream-history <streamid>
+```
+```
+$ akamai datastream stream-history 5665
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Stream ID: 5665
+Stream Version: 4
+Stream Name: achuth-ds2betajam
+Product Name Adaptive Media Delivery
+DataSets:
+Log information : ['Request ID', 'Request Time']
+Message exchange data : ['Client IP', 'Request Method']
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Stream ID: 5665
+Stream Version: 3
+Stream Name: achuth-ds2betajam
+Product Name Adaptive Media Delivery
+DataSets:
+Log information : ['CP Code']
+Message exchange data : ['Request Host', 'Client IP', 'Request Method', 'Request Path']
+Request header data : ['Referer', 'Range']
+Network performance data : ['Request End Time', 'Turn Around Time']
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Stream ID: 5665
+Stream Version: 2
+Stream Name: achuth-ds2betajam
+Product Name Adaptive Media Delivery
+DataSets:
+Log information : ['CP Code']
+Message exchange data : ['Request Host', 'Client IP', 'Request Method', 'HTTP Status Codes', 'Request Path', 'Protocol Type', 'Total Bytes']
+Request header data : ['Referer', 'Range']
+Network performance data : ['Request End Time', 'Turn Around Time']
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Stream ID: 5665
+Stream Version: 1
+Stream Name: achuth-ds2betajam
+Product Name Adaptive Media Delivery
+DataSets:
+Log information : ['CP Code', 'Request ID', 'Request Time']
+Message exchange data : ['Bytes', 'Request Host', 'Response Content Length', 'Client IP', 'Request Method', 'Response Content Type', 'HTTP Status Codes', 'Request Path', 'User-Agent', 'Protocol Type', 'Request Port', 'Total Bytes']
+Request header data : ['Accept-Language', 'X-Forwarded-For', 'Cookie', 'Range', 'Referer']
+Network performance data : ['Request End Time', 'Transfer Time', 'Error Code R14', 'Turn Around Time']
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ```
