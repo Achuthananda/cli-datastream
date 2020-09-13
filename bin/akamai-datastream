@@ -84,10 +84,49 @@ def main():
 
     elif config.command == "list-streams":
         if hasattr(config, 'accountSwitchKey'):
-            streamList = listStreams(config.groupid,config.accountSwitchKey)
+            streamList = listStreams(config.groupid,config.streamstatus,config.accountSwitchKey)
         else:
-            streamList = listStreams(config.groupid)
+            streamList = listStreams(config.groupid,config.streamstatus)
         formatOutputStreamList(streamList, config.output_type)
+
+    elif config.command == "list-properties":
+        if hasattr(config, 'accountSwitchKey'):
+            propertiesList = listProperties(config.groupid,config.productId,config.accountSwitchKey)
+        else:
+            propertiesList = listProperties(config.groupid,config.productId)
+        formatOutputPropertiesList(propertiesList, config.output_type)
+
+    elif config.command == "list-error-streams":
+        if hasattr(config, 'accountSwitchKey'):
+            errorstreamList = listErrorStreams(config.groupid,config.accountSwitchKey)
+        else:
+            errorstreamList = listErrorStreams(config.groupid)
+        formatOutputErrorStreamList(errorstreamList, config.output_type)
+
+    elif config.command == "create":
+        # Opening JSON file
+        f = open(config.file.name,'r')
+        data = json.load(f)
+        json_string = json.dumps(data) #Very Important since when you read it will be in single quotes, it need to be dumped to json and strings are only valid only in double quotes
+
+        if hasattr(config, 'accountSwitchKey'):
+            createResponse = createStream(json_string,config.accountSwitchKey)
+        else:
+            createResponse = createStream(json_string)
+        formatOutputActDeactResp(createResponse)
+
+    elif config.command == "update":
+        # Opening JSON file
+        f = open(config.file.name,'r')
+        data = json.load(f)
+        json_string = json.dumps(data) #Very Important since when you read it will be in single quotes, it need to be dumped to json and strings are only valid only in double quotes
+        print(json_string)
+        if hasattr(config, 'accountSwitchKey'):
+            updateResponse = updateStream(json_string,config.streamid,config.accountSwitchKey)
+        else:
+            updateResponse = updateStream(json_string,config.streamid)
+        formatOutputActDeactResp(updateResponse)
+
 
     elif config.command == "get-stream":
         if hasattr(config, 'accountSwitchKey'):
@@ -116,6 +155,27 @@ def main():
         else:
             datasetList = getDatasets(config.template)
         formatOutputDatasetList(datasetList, config.output_type)
+
+    elif config.command == "activate":
+        if hasattr(config, 'accountSwitchKey'):
+            activateResponse = activateStream(config.streamid,config.accountSwitchKey)
+        else:
+            activateResponse = activateStream(config.streamid)
+        formatOutputActDeactResp(activateResponse)
+
+    elif config.command == "deactivate":
+        if hasattr(config, 'accountSwitchKey'):
+            deactivateResponse = deActivateStream(config.streamid,config.accountSwitchKey)
+        else:
+            deactivateResponse = deActivateStream(config.streamid)
+        formatOutputActDeactResp(deactivateResponse)
+
+    elif config.command == "delete":
+        if hasattr(config, 'accountSwitchKey'):
+            deleteResponse = deleteStream(config.streamid,config.accountSwitchKey)
+        else:
+            deleteResponse = deleteStream(config.streamid)
+        formatOutputActDeactResp(deleteResponse)
 
 if __name__ == "__main__":
     main()

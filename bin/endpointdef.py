@@ -104,9 +104,6 @@ def listConnectors(accountSwitchKey=None):
     return(connectorList)
 
 def listProducts(accountSwitchKey=None):
-    """ List the type of connectors available with the datastream .
-    Can use one of the connector types as a destination for log delivery in a data stream configuration"""
-
     listProductEndpoint = 'datastream-config-api/v1/log/products'
 
     if accountSwitchKey:
@@ -128,17 +125,45 @@ def listStreamTypes(accountSwitchKey=None):
         streamTypeList = prdHttpCaller.getResult(listStreamTypeEndpoint)
     return(streamTypeList)
 
-def listStreams(groupId,accountSwitchKey=None):
+def listStreams(groupId,status,accountSwitchKey=None):
     """ List the type of Streams available with the Group """
 
-    listStreamsEndpoint = 'datastream-config-api/v1/log/streams/group/' + str(groupId)
+    listStreamsEndpoint = 'datastream-config-api/v1/log/streams'
 
     if accountSwitchKey:
-        params = {'accountSwitchKey':accountSwitchKey}
+        params = {'accountSwitchKey':accountSwitchKey,
+                  'groupId':str(groupId),
+                  'streamStatus':status
+                  }
         streamList = prdHttpCaller.getResult(listStreamsEndpoint,params)
     else:
         streamList = prdHttpCaller.getResult(listStreamsEndpoint)
     return(streamList)
+
+def listProperties(groupId,productId,accountSwitchKey=None):
+    """ List the type of Properties available with the Group """
+
+    listPropertiesEndpoint = 'datastream-config-api/v1/log/properties/product/'+str(productId)+'/group/'+str(groupId)
+
+    if accountSwitchKey:
+        params = {
+                    'accountSwitchKey':accountSwitchKey
+                  }
+        propertiesList = prdHttpCaller.getResult(listPropertiesEndpoint,params)
+    else:
+        propertiesList = prdHttpCaller.getResult(listPropertiesEndpoint)
+    return(propertiesList)
+
+
+def listErrorStreams(groupId,accountSwitchKey=None):
+    """ List the type of Error Streams available with the Group """
+    listErrorStreamsEndpoint = 'datastream-config-api/v1/log/error-streams/groups/' + str(groupId)
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        errorstreamList = prdHttpCaller.getResult(listErrorStreamsEndpoint,params)
+    else:
+        errorstreamList = prdHttpCaller.getResult(listErrorStreamsEndpoint)
+    return(errorstreamList)
 
 def getStream(streamId,accountSwitchKey=None):
     """Get the Details of the Stream """
@@ -184,3 +209,57 @@ def getDatasets(templatename,accountSwitchKey=None):
     else:
         datasetList = prdHttpCaller.getResult(datasetsEndpoint)
     return(datasetList)
+
+
+def createStream(data,accountSwitchKey=None):
+    """ Create a Stream"""
+    createEndpoint = '/datastream-config-api/v1/log/streams'
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        createResponse = prdHttpCaller.postResult(createEndpoint,data,params)
+    else:
+        createResponse = prdHttpCaller.postResult(createEndpoint,data)
+    return(createResponse)
+
+def updateStream(data,streamid,accountSwitchKey=None):
+    """ Update a Stream"""
+    updateEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamid)
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        updateResponse = prdHttpCaller.putResult(updateEndpoint,data,params)
+    else:
+        updateResponse = prdHttpCaller.putResult(updateEndpoint,data)
+    return(updateResponse)
+
+
+def activateStream(streamId,accountSwitchKey=None):
+    """ Activate a particular Datastream"""
+    activateEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamId) +'/activate/'
+    data = {}
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        activateResponse = prdHttpCaller.putResult(activateEndpoint,data,params)
+    else:
+        activateResponse = prdHttpCaller.putResult(activateEndpoint,data)
+    return(activateResponse)
+
+def deActivateStream(streamId,accountSwitchKey=None):
+    """ Deactivate a particular stream"""
+    deactivateEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamId) +'/deactivate/'
+    data = {}
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        deactivateResponse = prdHttpCaller.putResult(deactivateEndpoint,data,params)
+    else:
+        deactivateResponse = prdHttpCaller.putResult(deactivateEndpoint,data)
+    return(deactivateResponse)
+
+def deleteStream(streamId,accountSwitchKey=None):
+    """ Delete a particular stream"""
+    deleteEndpoint = '/datastream-config-api/v1/log/streams/' + str(streamId)
+    if accountSwitchKey:
+        params = {'accountSwitchKey':accountSwitchKey}
+        deleteResponse = prdHttpCaller.deleteResult(deleteEndpoint,params)
+    else:
+        deleteResponse = prdHttpCaller.deleteResult(deleteEndpoint)
+    return(deleteResponse)

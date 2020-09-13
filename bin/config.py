@@ -59,7 +59,15 @@ class EdgeGridConfig():
 
         list_streams_parser = subparsers.add_parser("list-streams", help="List all Streams.")
         list_streams_parser.add_argument('groupid', help="Group id for which streams need to be retrieve", action='store')
-        list_streams_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+        list_streams_parser.add_argument('--streamstatus','-s', default='ACTIVATED', choices=['ACTIVATED', 'DEACTIVATED','IN_PROGRESS'],metavar='activated/deactivated/in_progress', help=' Status of the stream. Default is Activated')
+        list_streams_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
+
+
+        list_properties_parser = subparsers.add_parser("list-properties", help="List all Properties.")
+        list_properties_parser.add_argument('groupid', help="Group id for which properties need to be listed", action='store')
+        list_properties_parser.add_argument('productId', help="Product id for which properties need to be listed", action='store')
+        list_properties_parser.add_argument('--output-type', '-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type {json, text}. Default is text')
+
 
         list_datasets_parser = subparsers.add_parser("list-datasets", help="List all Datasets.")
         list_datasets_parser.add_argument('--template', default='EDGE_LOGS', choices=['EDGE_LOGS'],help=' Template name for which datasets need to be fetched.[Example: EDGE_LOGS]')
@@ -81,6 +89,27 @@ class EdgeGridConfig():
         stream_history_parser.add_argument('streamid', help="Stream ID", action='store')
         stream_history_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
 
+        '''
+        list_error_streams_parser = subparsers.add_parser("list-error-streams", help="List all Errored Streams.")
+        list_error_streams_parser.add_argument('groupid', help="Group id for which error streams need to be retrieve", action='store')
+        list_error_streams_parser.add_argument('--output-type','-t', default='text', choices=['json', 'text'],metavar='json/text', help=' Output type is json or text. Default is text')
+        '''
+
+        create_stream_parser = subparsers.add_parser("create", help="Create a Particular Stream.")
+        create_stream_parser.add_argument('file', help="Json File consiting of Stream Details", type=argparse.FileType('r'))
+
+        update_stream_parser = subparsers.add_parser("update", help="Update a Particular Stream.")
+        update_stream_parser.add_argument('streamid', help="Stream ID", action='store')
+        update_stream_parser.add_argument('file', help="Json File consiting of Stream Details", type=argparse.FileType('r'))
+
+        activation_parser = subparsers.add_parser("activate", help="Activate a Particular Stream.")
+        activation_parser.add_argument('streamid', help="Stream ID", action='store')
+
+        deactivation_parser = subparsers.add_parser("deactivate", help="Deactivate a Particular Stream.")
+        deactivation_parser.add_argument('streamid', help="Stream ID", action='store')
+
+        deletion_parser = subparsers.add_parser("delete", help="Delete a Particular Stream.")
+        deletion_parser.add_argument('streamid', help="Stream ID", action='store')
 
         if flags:
             for argument in flags.keys():
