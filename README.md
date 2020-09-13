@@ -46,16 +46,29 @@ usage: akamai-datastream [-h] [--verbose] [--debug]
                          [--edgerc credentials_file]
                          [--section credentials_file_section]
                          [--accountSwitchKey Account Switch Key]
-                         {list-groups,list-connectors} ...
+                         {list-groups,list-connectors,list-stream-types,list-streams,list-properties,list-datasets,list-products,get-stream,activation-history,stream-history,create,update,activate,deactivate,delete}
+                         ...
 
 Process command line options.
 
 positional arguments:
-  {list-groups,list-connectors}
+  {list-groups,list-connectors,list-stream-types,list-streams,list-properties,list-datasets,list-products,get-stream,activation-history,stream-history,create,update,activate,deactivate,delete}
                         commands
     list-groups         List all Groups in the Account
-    list-connectors     List all Connectors Available. One of the connector
-                        can be used as destination.
+    list-connectors     List all Connectors.
+    list-stream-types   List all Types of Stream.
+    list-streams        List all Streams.
+    list-properties     List all Properties.
+    list-datasets       List all Datasets.
+    list-products       List all Products.
+    get-stream          Get Details of Stream.
+    activation-history  Get Details of Stream Activation History.
+    stream-history      Get Details of Stream History.
+    create              Create a Particular Stream.
+    update              Update a Particular Stream.
+    activate            Activate a Particular Stream.
+    deactivate          Deactivate a Particular Stream.
+    delete              Delete a Particular Stream.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -68,7 +81,6 @@ optional arguments:
                         Credentials file Section's name to use
   --accountSwitchKey Account Switch Key, -a Account Switch Key
                         Switch key to different account
-
 ```
 
 #### Usage of list-groups Command
@@ -669,5 +681,49 @@ $ akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL update 6454 update.jso
     "streamId": 6454,
     "streamVersionId": 2
   }
+}
+```
+
+#### Delete a Stream.
+This CLI will delete a stream. The stream should be in deactivated state.
+```
+$akamai datastream delete <streamId>
+```
+```
+$ akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6455
+{
+  "message": "Success"
+}
+```
+```
+$akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6455
+{
+  "type": "bad-request",
+  "title": "Bad Request",
+  "instance": "790778d4-e130-4bbb-a329-44090e547985",
+  "status": 400,
+  "errors": [
+    {
+      "type": "bad-request",
+      "title": "Bad Request",
+      "detail": "Stream is already deleted.Please provide valid stream."
+    }
+  ]
+}
+```
+```
+$akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6305
+{
+  "type": "bad-request",
+  "title": "Bad Request",
+  "instance": "26acb89e-a2fc-4439-9b15-d59f513e3811",
+  "status": 400,
+  "errors": [
+    {
+      "type": "bad-request",
+      "title": "Bad Request",
+      "detail": "Deactivation of stream is in progress. Stream can not be deleted."
+    }
+  ]
 }
 ```
