@@ -659,6 +659,7 @@ This CLI will create a stream. This command expects a json file in the same dire
 ```
 $akamai datastream create <json_file_name>
 ```
+Create json file format is shown below.
 ```
 {
   "streamName": "test-ds-jam",
@@ -718,6 +719,7 @@ This CLI will update a stream. This command expects stream id and a json file in
 ```
 $akamai datastream update <streamId> <json_file_name>
 ```
+Update json file format is shown below.
 ```
 {
     "streamName": "achuth-dasdsads2betajam",
