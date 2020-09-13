@@ -675,7 +675,7 @@ This CLI will update a stream. This command expects stream id and a json file in
 $akamai datastream update <streamId> <json_file_name>
 ```
 ```
-$ akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL update 6454 update.json
+$ akamai datastream update 6454 update.json
 {
   "streamVersionKey": {
     "streamId": 6454,
@@ -690,13 +690,13 @@ This CLI will delete a stream. The stream should be in deactivated state.
 $akamai datastream delete <streamId>
 ```
 ```
-$ akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6455
+$ akamai datastream delete 6455
 {
   "message": "Success"
 }
 ```
 ```
-$akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6455
+$akamai datastream delete 6455
 {
   "type": "bad-request",
   "title": "Bad Request",
@@ -712,7 +712,7 @@ $akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6455
 }
 ```
 ```
-$akamai datastream --accountSwitchKey B-3-16OEUPX:1-2RBL delete 6305
+$akamai datastream delete 6305
 {
   "type": "bad-request",
   "title": "Bad Request",
