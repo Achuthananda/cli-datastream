@@ -70,7 +70,7 @@ def formatOutputConnectorList(connectorlist, output_type):
         Parentheader = ['ConnectorType Id','ConnectorType Name']
         ParentTable.header(Parentheader)
         for my_item in connectorlist:
-            Parentrow = [ my_item["connectorTypeId"],my_item["connectorTypeName"]]
+            Parentrow = [ my_item["connectorType"],my_item["connectorTypeName"]]
             ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
